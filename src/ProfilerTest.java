@@ -9,7 +9,7 @@ public class ProfilerTest {
 
 
     public void firstTestMethod() {
-        System.out.println("firstTestMethod");
+        System.out.println("firstTestMethod Od ostaha");
     }
 
     public void secondTestMethod() {
