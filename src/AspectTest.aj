@@ -1,3 +1,5 @@
+import org.aspectj.lang.reflect.MethodSignature;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Ostah
@@ -6,9 +8,9 @@
  * To change this template use File | Settings | File Templates.
  */
 public aspect AspectTest {
-    pointcut greeting() : call(* ProfilerTest.firstTestMethod(..));
+    pointcut AllMethods() : (call(* *(..)) && !within(AspectTest));
 
-    after() : greeting() {
-        System.out.println("AOP KURWA!");
+    after() : AllMethods() {
+        System.out.println("metoda : "+ thisJoinPoint.getSignature()+" wywołana z : "+thisEnclosingJoinPointStaticPart.getSignature()+"\n");
     }
 }
