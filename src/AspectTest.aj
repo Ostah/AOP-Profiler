@@ -1,5 +1,10 @@
 import org.aspectj.lang.reflect.MethodSignature;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Ostah
@@ -7,10 +12,35 @@ import org.aspectj.lang.reflect.MethodSignature;
  * Time: 14:49
  * To change this template use File | Settings | File Templates.
  */
+
+
 public aspect AspectTest {
+    static public Map<String,Integer>  callCounts =  new HashMap<String,Integer>();
+
     pointcut AllMethods() : (call(* *(..)) && !within(AspectTest));
 
     after() : AllMethods() {
-        System.out.println("metoda : "+ thisJoinPoint.getSignature()+" wywołana z : "+thisEnclosingJoinPointStaticPart.getSignature()+"\n");
+        String name =  thisJoinPoint.getSignature().toString();
+        String caller = thisEnclosingJoinPointStaticPart.getSignature().toString();
+
+        //zliczanie wywołań
+        Integer i  =  callCounts.get(name);
+        if(i  !=  null)  callCounts.put(name,new  Integer(i.intValue()+1));
+        else  callCounts.put(name,new  Integer(1));
+
+        System.out.println("metoda : "+ name+" wywołana z : "+caller+"\n");
+    }
+
+    public static void printStats(){
+        Set s=callCounts.entrySet();
+        Iterator it=s.iterator();
+
+        while(it.hasNext()){
+            Map.Entry m =(Map.Entry)it.next();
+            String key=(String)m.getKey();
+            Integer value=(Integer)m.getValue();
+            System.out.println("Method :"+key+" was called "+value+" times");
+        }
+        System.out.println("") ;
     }
 }
