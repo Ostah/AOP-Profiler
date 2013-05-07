@@ -1,7 +1,3 @@
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-
 /**
  * Created with IntelliJ IDEA.
  * User: Jacek
@@ -11,7 +7,9 @@ import java.util.Set;
  */
 public class ProfilerTest {
 
-
+    ProfilerTest(){
+        System.out.println("constructor");
+    }
     public void firstTestMethod() {
         System.out.println("firstTestMethod");
     }
@@ -20,13 +18,21 @@ public class ProfilerTest {
         System.out.println("secondTestMethod");
     }
 
+    public void otherMethod() {
+        System.out.println("otherMethod");
+        this.secondTestMethod();
+    }
+
     public static void main(String[] args) {
         ProfilerTest profilerTest = new ProfilerTest();
         profilerTest.firstTestMethod();
         profilerTest.firstTestMethod();
         profilerTest.secondTestMethod();
+        profilerTest.otherMethod();
+        profilerTest.otherMethod();
+        profilerTest.otherMethod();
 
-        AspectTest.printStats();
+        AspectCount.printStats();
     }
 
 }

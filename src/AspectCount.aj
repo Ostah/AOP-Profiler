@@ -1,5 +1,3 @@
-import org.aspectj.lang.reflect.MethodSignature;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -14,10 +12,11 @@ import java.util.Set;
  */
 
 
-public aspect AspectTest {
+public aspect AspectCount {
     static public Map<String,Integer>  callCounts =  new HashMap<String,Integer>();
 
-    pointcut AllMethods() : (call(* *(..)) && !within(AspectTest));
+    // jeśli zamienimy tutaj calle na executiony to nie będzie łapać zewnętrznych metod (np printfów)
+    pointcut AllMethods() : ((call(* *(..)) || call(*.new(..)))  && !within(AspectCount));
 
     after() : AllMethods() {
         String name =  thisJoinPoint.getSignature().toString();
@@ -28,19 +27,20 @@ public aspect AspectTest {
         if(i  !=  null)  callCounts.put(name,new  Integer(i.intValue()+1));
         else  callCounts.put(name,new  Integer(1));
 
-        System.out.println("metoda : "+ name+" wywołana z : "+caller+"\n");
+       // System.out.println("metoda : "+ name+" wywołana z : "+caller+"\n");
     }
 
     public static void printStats(){
         Set s=callCounts.entrySet();
         Iterator it=s.iterator();
 
+        System.out.println("\nStatistics ------------------------------------------------------ ");
         while(it.hasNext()){
             Map.Entry m =(Map.Entry)it.next();
             String key=(String)m.getKey();
             Integer value=(Integer)m.getValue();
-            System.out.println("Method :"+key+" was called "+value+" times");
+            System.out.println("Method: "+key+" was called "+value+" times");
         }
-        System.out.println("") ;
+        System.out.println("-----------------------------------------------------------------\n") ;
     }
 }
