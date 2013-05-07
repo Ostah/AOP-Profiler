@@ -26,11 +26,11 @@ public class ProfilerTest {
     public static void main(String[] args) {
         ProfilerTest profilerTest = new ProfilerTest();
         profilerTest.firstTestMethod();
-        profilerTest.firstTestMethod();
-        profilerTest.secondTestMethod();
-        profilerTest.otherMethod();
-        profilerTest.otherMethod();
-        profilerTest.otherMethod();
+//        profilerTest.firstTestMethod();
+//        profilerTest.secondTestMethod();
+//        profilerTest.otherMethod();
+//        profilerTest.otherMethod();
+//        profilerTest.otherMethod();
 
         AspectCount.printStats();
     }
