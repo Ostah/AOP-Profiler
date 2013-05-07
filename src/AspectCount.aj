@@ -12,11 +12,8 @@ import java.util.Set;
  */
 
 
-public aspect AspectCount {
+public aspect AspectCount extends AspectAllMethods {
     static public Map<String,Integer>  callCounts =  new HashMap<String,Integer>();
-
-    // jeśli zamienimy tutaj calle na executiony to nie będzie łapać zewnętrznych metod (np printfów)
-    pointcut AllMethods() : ((call(* *(..)) || call(*.new(..)))  && !within(AspectCount));
 
     after() : AllMethods() {
         String name =  thisJoinPoint.getSignature().toString();
@@ -31,8 +28,8 @@ public aspect AspectCount {
     }
 
     public static void printStats(){
-        Set s=callCounts.entrySet();
-        Iterator it=s.iterator();
+
+        Iterator it=callCounts.entrySet().iterator();
 
         System.out.println("\nStatistics ------------------------------------------------------ ");
         while(it.hasNext()){
