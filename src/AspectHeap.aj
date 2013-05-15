@@ -1,3 +1,5 @@
+import size.RamUsageEstimator;
+
 import java.util.Hashtable;
 
 /**
@@ -10,12 +12,13 @@ import java.util.Hashtable;
 public aspect AspectHeap {
     public static Hashtable usesList = new Hashtable();
 
-    pointcut HeapUsage() : call(*.new(..)) && !within(AspectHeap)&&!within(AspectCount) && !within(AspectTimer) && !within(Sizeof);
+    pointcut HeapUsage() : call(*.new(..)) && !within(AspectHeap)&&!within(AspectCount) && !within(AspectTimer) && !within(Sizeof)&& !within(RamUsageEstimator)&& !within(ObjectTree)&& !within(BlackMagic)&& !within(Constants)&& !within(IdentityHashSet)&& !within(MurmurHash3);
 
     before(): HeapUsage(){
         Integer tot = getTotal(thisEnclosingJoinPointStaticPart);
         Class createdClass = thisJoinPoint.getStaticPart().getSignature().getDeclaringType();
-        tot += Sizeof.sizeof(createdClass);
+        //tot += Sizeof.sizeof(createdClass);
+        tot = tot + (int) (long) RamUsageEstimator.sizeOf(createdClass);
         System.out.println("tot= "+tot+ " "+thisEnclosingJoinPointStaticPart.getSignature().toString())            ;
         usesList.put(thisEnclosingJoinPointStaticPart,tot) ;
     }
