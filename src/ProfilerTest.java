@@ -15,6 +15,7 @@ public class ProfilerTest {
     }
 
     public void secondTestMethod() {
+        HeapTestClass a = new HeapTestClass();
         System.out.println("secondTestMethod");
     }
 
@@ -25,6 +26,7 @@ public class ProfilerTest {
 
     public static void main(String[] args) {
         ProfilerTest profilerTest = new ProfilerTest();
+        Integer tralala = new Integer(1231);
         profilerTest.firstTestMethod();
         profilerTest.firstTestMethod();
         profilerTest.secondTestMethod();

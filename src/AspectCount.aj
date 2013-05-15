@@ -39,5 +39,6 @@ public aspect AspectCount extends AspectAllMethods {
             System.out.println("Method: "+key+" was called "+value+" times");
         }
         System.out.println("-----------------------------------------------------------------\n") ;
+        System.out.println(AspectHeap.usesList);
     }
 }

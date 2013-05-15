@@ -8,21 +8,16 @@ import java.util.Hashtable;
 * To change this template use File | Settings | File Templates.
 */
 public aspect AspectHeap {
-    Hashtable usesList = new Hashtable();
+    public static Hashtable usesList = new Hashtable();
 
-    pointcut HeapUsage() : call(*.new(..)) && within(AspectHeap);
+    pointcut HeapUsage() : call(*.new(..)) && !within(AspectHeap)&&!within(AspectCount) && !within(AspectTimer) && !within(Sizeof);
 
     before(): HeapUsage(){
         Integer tot = getTotal(thisEnclosingJoinPointStaticPart);
         Class createdClass = thisJoinPoint.getStaticPart().getSignature().getDeclaringType();
-
-        if(createdClass.isArray()){
-            Object[] data = thisJoinPoint.getArgs();
-            tot += sizeof(createdClass,data);
-        }
-        else{
-            tot += sizeof(createdClass);
-        }
+        tot += Sizeof.sizeof(createdClass);
+        System.out.println("tot= "+tot+ " "+thisEnclosingJoinPointStaticPart.getSignature().toString())            ;
+        usesList.put(thisEnclosingJoinPointStaticPart,tot) ;
     }
 
     Integer getTotal(Object k){
@@ -34,10 +29,8 @@ public aspect AspectHeap {
         return  s;
     }
 
-    Integer sizeof(Class c) {
-        return  0;
-    }
-    Integer sizeof(Class c, Object arrayDimensions) {
-        return  0;
-    }
+
+
+
+
 }

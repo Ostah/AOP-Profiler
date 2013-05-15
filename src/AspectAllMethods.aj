@@ -12,6 +12,6 @@ public abstract aspect AspectAllMethods {
     // jeśli zamienimy tutaj calle na executiony to nie będzie łapać zewnętrznych metod (np printfów)
     // ale dzięki temu będzie bardziej bezpiecznie (execution wyłapuje ciało metody, call tylko jej wywołanie)
 
-    pointcut AllMethods() : ((call(* *(..)) || call(*.new(..)))  && !within(AspectCount) && !within(AspectTimer));
+    pointcut AllMethods() : ((call(* *(..)) || call(*.new(..)))  && !within(AspectCount) && !within(AspectTimer) && !within(AspectHeap) && !within(Sizeof));
 
 }
