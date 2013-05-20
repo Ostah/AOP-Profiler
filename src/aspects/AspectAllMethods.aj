@@ -1,3 +1,5 @@
+package aspects;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Ostah
@@ -12,6 +14,6 @@ public abstract aspect AspectAllMethods {
     // jeśli zamienimy tutaj calle na executiony to nie będzie łapać zewnętrznych metod (np printfów)
     // ale dzięki temu będzie bardziej bezpiecznie (execution wyłapuje ciało metody, call tylko jej wywołanie)
 
-    pointcut AllMethods() : ((call(* *(..)) || call(*.new(..)))  && !within(AspectCount) && !within(AspectTimer) && !within(AspectHeap) && !within(Sizeof)&& !within(RamUsageEstimator)&& !within(ObjectTree)&& !within(BlackMagic)&& !within(Constants)&& !within(IdentityHashSet)&& !within(MurmurHash3));
+    pointcut AllMethods() : ((call(* *(..)) || call(*.new(..)))&& !call(@annotations.ProfilerIgnore * *.*(..))  && !within(@annotations.ProfilerIgnore *) && !within(aspects..*)&& !within(size..*));
 
 }

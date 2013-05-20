@@ -1,4 +1,4 @@
-/**
+package aspects; /**
  * Created with IntelliJ IDEA.
  * User: Jacek
  * Date: 07.05.2013
@@ -33,7 +33,7 @@ public aspect AspectTimer extends AspectAllMethods
             innerTime = times.get(thisJoinPointStaticPart.getSignature().toString());
             times.put(thisJoinPointStaticPart.getSignature().toString(), 0.0);
         }
-        System.out.println("Method: " + thisJoinPointStaticPart.getSignature() + " took " + new BigDecimal(Double.toString((end-start)/1000000000)).toPlainString() + " seconds, without inner methods took: " + new BigDecimal(Double.toString(((end-start) - innerTime.doubleValue())/1000000000)).toPlainString() + " seconds");
+       // System.out.println("Method: " + thisJoinPointStaticPart.getSignature() + " took " + new BigDecimal(Double.toString((end-start)/1000000000)).toPlainString() + " seconds, without inner methods took: " + new BigDecimal(Double.toString(((end-start) - innerTime.doubleValue())/1000000000)).toPlainString() + " seconds");
         return ret;
     }
 }

@@ -1,3 +1,5 @@
+import aspects.AspectCount;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Jacek
@@ -5,15 +7,18 @@
  * Time: 12:47
  * To change this template use File | Settings | File Templates.
  */
+
+
 public class ProfilerTest {
 
     ProfilerTest(){
         System.out.println("constructor");
     }
+
     public void firstTestMethod() {
         System.out.println("firstTestMethod");
     }
-
+    @annotations.ProfilerIgnore
     public void secondTestMethod() {
         HeapTestClass a = new HeapTestClass();
         System.out.println("secondTestMethod");

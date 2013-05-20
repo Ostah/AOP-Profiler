@@ -11,12 +11,13 @@ public class HeapTestClass {
         test2 = 123123123123l;
         test3 = 12423525235l;
         test4 = 415345262626l;
+        anArray =  new int[9000];
 
     }
     Integer test1 ;
     Long test2;
     Long test3;
     Long test4;
-
+    int anArray[];
 
 }
