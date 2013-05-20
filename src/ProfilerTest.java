@@ -1,4 +1,5 @@
 import aspects.AspectCount;
+import aspects.Res;
 
 /**
  * Created with IntelliJ IDEA.
@@ -39,7 +40,8 @@ public class ProfilerTest {
         profilerTest.otherMethod();
         profilerTest.otherMethod();
 
-        AspectCount.printStats();
+
+
     }
 
 }
