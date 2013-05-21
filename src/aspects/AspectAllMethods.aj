@@ -12,14 +12,32 @@ public abstract aspect AspectAllMethods {
 
     // jeśli zamienimy tutaj calle na executiony to nie będzie łapać zewnętrznych metod (np printfów)
     // ale dzięki temu będzie bardziej bezpiecznie (execution wyłapuje ciało metody, call tylko jej wywołanie)
+
+    // Ostah - zmieniać z ostrożnością :D
     pointcut AllMethods() :
     (
-       (call(* *(..)) || call(*.new(..))) &&
+       (call(* *(..)) || call(*.new(..))) && !within(aspects..*)&& !within(size..*) &&
        (
-            (if(Config.get().PROFILE_ONLY_ANNOTATED == true) &&( call(@annotations.ProfilerProfile * *.*(..)) || within(@annotations.ProfilerProfile *))) ||
-            (if(Config.get().PROFILE_ONLY_ANNOTATED == false) &&( !call(@annotations.ProfilerIgnore * *.*(..)) && !within(@annotations.ProfilerIgnore *)))
+                if(Config.get().PROFILE_ONLY_ANNOTATED == true)&&
+                (
+                    (
+                        call(@annotations.ProfilerProfile * *.*(..)) ||
+                        within(@annotations.ProfilerProfile *)
+                    )
+                    && !call(@annotations.ProfilerIgnore * *.*(..))
+                )
+            ||
+                if(Config.get().PROFILE_ONLY_ANNOTATED == false) &&
+                (
+
+                    (
+                        !within(@annotations.ProfilerIgnore *) ||
+                        call(@annotations.ProfilerProfile * *.*(..))
+                    )
+                    &&  !call(@annotations.ProfilerIgnore * *.*(..))
+                )
        )
-       && !within(aspects..*)&& !within(size..*)
+
     );
 
 }

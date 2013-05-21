@@ -17,7 +17,7 @@ public class ProfilerTest {
         System.out.println("constructor");
     }
 
-    @ProfilerIgnore
+
     public void firstTestMethod() {
         System.out.println("firstTestMethod");
     }
