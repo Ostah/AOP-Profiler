@@ -1,5 +1,4 @@
 import aspects.AspectCount;
-import aspects.Res;
 
 /**
  * Created with IntelliJ IDEA.

@@ -32,14 +32,14 @@ public aspect AspectCount extends AspectAllMethods {
 
         Iterator it=callCounts.entrySet().iterator();
 
-        System.out.println("\nStatistics ------------------------------------------------------ ");
+        Logger.get().writeLine("\nStatistics ------------------------------------------------------ ");
         while(it.hasNext()){
             Map.Entry m =(Map.Entry)it.next();
             String key=(String)m.getKey();
             Integer value=(Integer)m.getValue();
-            System.out.println("Method: "+key+" was called "+value+" times");
+            Logger.get().writeLine("Method: "+key+" was called "+value+" times");
         }
-        System.out.println("-----------------------------------------------------------------\n") ;
+        Logger.get().writeLine("-----------------------------------------------------------------\n") ;
         System.out.println(AspectHeap.usesList);
     }
 }
