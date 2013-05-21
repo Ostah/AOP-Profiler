@@ -38,6 +38,7 @@ public class Logger {
             e.printStackTrace();
         }
     }
+
     public void close(){
         try {out.close();}
         catch (IOException e) {

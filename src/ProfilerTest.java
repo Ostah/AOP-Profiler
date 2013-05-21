@@ -1,3 +1,5 @@
+import annotations.ProfilerIgnore;
+import annotations.ProfilerProfile;
 import aspects.AspectCount;
 
 /**
@@ -15,10 +17,11 @@ public class ProfilerTest {
         System.out.println("constructor");
     }
 
+    @ProfilerIgnore
     public void firstTestMethod() {
         System.out.println("firstTestMethod");
     }
-    @annotations.ProfilerIgnore
+
     public void secondTestMethod() {
         HeapTestClass a = new HeapTestClass();
         System.out.println("secondTestMethod");
@@ -31,13 +34,13 @@ public class ProfilerTest {
 
     public static void main(String[] args) {
         ProfilerTest profilerTest = new ProfilerTest();
-        Integer tralala = new Integer(1231);
+//        Integer tralala = new Integer(1231);
         profilerTest.firstTestMethod();
-        profilerTest.firstTestMethod();
+//        profilerTest.firstTestMethod();
         profilerTest.secondTestMethod();
-        profilerTest.otherMethod();
-        profilerTest.otherMethod();
-        profilerTest.otherMethod();
+//        profilerTest.otherMethod();
+//        profilerTest.otherMethod();
+//        profilerTest.otherMethod();
 
 
 

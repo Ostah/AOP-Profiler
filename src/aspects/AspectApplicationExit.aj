@@ -19,6 +19,11 @@ import javax.swing.*;
  */
 
 public aspect AspectApplicationExit {
+
+       before():  execution( public static void main(..)) {
+              Config.get();
+       }
+
        after():  execution( public static void main(..)) {
            AspectCount.printStats();
            Logger.get().close();
