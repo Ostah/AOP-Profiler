@@ -1,46 +1,40 @@
 package aspects;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
-import javax.swing.table.*;
 
 public class TableBasic extends JFrame
 {
-    public TableBasic(Object[][] data)
-    {
-        String[] columnNames = {"Caller", "Method", "Count"};
+    public ArrayList<JTable> mTables = new ArrayList<JTable>(); // dostęp do tabelek może sie przydać więc dodaje to tutaj
+    JTabbedPane mTabbedPane;
 
-        final JTable table = new JTable(data, columnNames)
-        {
-            //  Returning the Class of each column will allow different
-            //  renderers and editors to be used based on Class
+    public TableBasic(){
+        mTabbedPane = new JTabbedPane();
+        getContentPane().add(mTabbedPane);
+        setTitle("Profiler Summary");
+        setPreferredSize(new Dimension(800, 600));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
 
-            public Class getColumnClass(int column)
-            {
-                for (int row = 0; row < getRowCount(); row++)
-                {
-                    Object o = getValueAt(row, column);
+    public void addTableTab(Object[][] data, String[] columnNames, String paneName, int sortColumn){
 
-                    if (o != null)
-                        return o.getClass();
-                }
-
-                return Object.class;
-            }
-        };
+        JTable table = new JTable(data, columnNames);
         table.setPreferredScrollableViewportSize(table.getPreferredSize());
-
         table.setAutoCreateRowSorter(true);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+
         DefaultRowSorter sorter = ((DefaultRowSorter)table.getRowSorter());
         ArrayList list = new ArrayList();
-        list.add( new RowSorter.SortKey(2, SortOrder.ASCENDING) );
+        list.add( new RowSorter.SortKey(sortColumn, SortOrder.DESCENDING) );
         sorter.setSortKeys(list);
         sorter.sort();
-        table.setAutoResizeMode( JTable.AUTO_RESIZE_LAST_COLUMN);
-        JScrollPane scrollPane = new JScrollPane( table );
-        getContentPane().add( scrollPane );
+
+        mTabbedPane.add(paneName, new JScrollPane(table));
+        mTables.add(table);
     }
 
 }

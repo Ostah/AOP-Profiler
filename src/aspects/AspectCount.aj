@@ -51,7 +51,7 @@ public aspect AspectCount extends AspectAllMethods {
         System.out.println(callCountsAccurate);
     }
 
-    public static Object[][] getValuesForTable(){
+    public static Object[][] getCallerMethod(){
         Iterator it=callCountsAccurate.entrySet().iterator();
         Object[][] o = new Object[callCountsAccurate.size()][3];
         int i = 0;
@@ -60,6 +60,18 @@ public aspect AspectCount extends AspectAllMethods {
             o[i][0] = ((MethodCall) m.getKey()).getCaller();
             o[i][1] = ((MethodCall) m.getKey()).getMethod();
             o[i][2] = m.getValue() ;
+            i++;
+        }
+        return o;
+    }
+    public static Object[][] getCaller(){
+        Iterator it=callCounts.entrySet().iterator();
+        Object[][] o = new Object[callCounts.size()][2];
+        int i = 0;
+        while(it.hasNext()){
+            Map.Entry m = (Map.Entry)it.next();
+            o[i][0] = (String) m.getKey();
+            o[i][1] = m.getValue() ;
             i++;
         }
         return o;

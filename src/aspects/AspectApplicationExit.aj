@@ -1,8 +1,5 @@
 package aspects;
 
-import javax.swing.*;
-import java.awt.*;
-
 /**
  * Created with IntelliJ IDEA.
  * User: Ostah
@@ -26,15 +23,14 @@ public aspect AspectApplicationExit {
 
        after():  execution( public static void main(..)) {
 
-           AspectCount.getValuesForTable();
+           AspectCount.getCallerMethod();
            if(Config.get().SHOW_WINDOW_SUMMARY == true) {
-               TableBasic frame = new TableBasic(AspectCount.getValuesForTable());
-               frame.setTitle("Profiler Summary");
-               frame.setPreferredSize(new Dimension(800, 600));
-               frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-               frame.pack();
-               frame.setLocationRelativeTo( null );
-               frame.setVisible(true);
+               TableBasic frame = new TableBasic();
+
+               String[] labels1 = {"Caller", "Method", "Count"} ;
+               String[] labels2 = {"Caller", "Count"} ;
+               frame.addTableTab(AspectCount.getCallerMethod(), labels1, "Caller/Method",2);
+               frame.addTableTab(AspectCount.getCaller(), labels2, "Method Count",1);
            }
 
            AspectCount.printStats();
