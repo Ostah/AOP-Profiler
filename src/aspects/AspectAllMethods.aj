@@ -26,7 +26,7 @@ public abstract aspect AspectAllMethods {
                     )
                     && !call(@annotations.ProfilerIgnore * *.*(..))
                 )
-            ||
+                ||
                 if(Config.get().PROFILE_ONLY_ANNOTATED == false) &&
                 (
 
@@ -37,7 +37,5 @@ public abstract aspect AspectAllMethods {
                     &&  !call(@annotations.ProfilerIgnore * *.*(..))
                 )
        )
-
     );
-
 }

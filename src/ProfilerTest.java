@@ -17,13 +17,13 @@ public class ProfilerTest {
         System.out.println("constructor");
     }
 
-
+    @ProfilerProfile
     public void firstTestMethod() {
         System.out.println("firstTestMethod");
     }
 
     public void secondTestMethod() {
-        HeapTestClass a = new HeapTestClass();
+       // HeapTestClass a = new HeapTestClass();
         System.out.println("secondTestMethod");
     }
 

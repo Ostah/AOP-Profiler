@@ -1,7 +1,5 @@
 package aspects;
 
-import javax.swing.*;
-
 /**
  * Created with IntelliJ IDEA.
  * User: Ostah
@@ -12,7 +10,6 @@ import javax.swing.*;
  * within pakiety - sterowanie pakietami
     proste gui
     ltw
-    adnotacje
     z jakiej metody jest wywolywana metoda, i co wywoluje ona sama
     narzut czasowy - jak wplywa aop na wydajnosc aplikacji
     % bledu w czasach
@@ -25,6 +22,8 @@ public aspect AspectApplicationExit {
        }
 
        after():  execution( public static void main(..)) {
+           WindowSummary aaa = new WindowSummary();
+           aaa.createWindow();
            AspectCount.printStats();
            Logger.get().close();
        }
