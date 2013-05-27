@@ -15,6 +15,7 @@ import java.util.StringTokenizer;
 public final class Config {
     private static Config ourInstance = null;
     public static Boolean PROFILE_ONLY_ANNOTATED = null;
+    public static Boolean SHOW_WINDOW_SUMMARY = null;
 
     public static Config get() {
         if(ourInstance == null){
@@ -39,7 +40,7 @@ public final class Config {
 
                 if(option == null || flag == null) continue;
                 if(option.equalsIgnoreCase("PROFILE_ONLY_ANNOTATED")) PROFILE_ONLY_ANNOTATED = Boolean.valueOf(flag);
-                System.out.println("boo: "+PROFILE_ONLY_ANNOTATED.toString());
+                if(option.equalsIgnoreCase("SHOW_WINDOW_SUMMARY")) SHOW_WINDOW_SUMMARY = Boolean.valueOf(flag);
             }
 
             bf.close();

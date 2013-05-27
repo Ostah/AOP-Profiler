@@ -19,7 +19,7 @@ public class ProfilerTest {
 
     @ProfilerProfile
     public void firstTestMethod() {
-        System.out.println("firstTestMethod");
+        //System.out.println("firstTestMethod");
     }
 
     public void secondTestMethod() {
@@ -34,13 +34,14 @@ public class ProfilerTest {
 
     public static void main(String[] args) {
         ProfilerTest profilerTest = new ProfilerTest();
-//        Integer tralala = new Integer(1231);
+        Integer tralala = new Integer(1231);
         profilerTest.firstTestMethod();
-//        profilerTest.firstTestMethod();
+        profilerTest.firstTestMethod();
+        profilerTest.firstTestMethod();
         profilerTest.secondTestMethod();
-//        profilerTest.otherMethod();
-//        profilerTest.otherMethod();
-//        profilerTest.otherMethod();
+        profilerTest.otherMethod();
+        profilerTest.otherMethod();
+        profilerTest.otherMethod();
 
 
 

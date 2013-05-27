@@ -1,5 +1,8 @@
 package aspects;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Ostah
@@ -22,8 +25,18 @@ public aspect AspectApplicationExit {
        }
 
        after():  execution( public static void main(..)) {
-           WindowSummary aaa = new WindowSummary();
-           aaa.createWindow();
+
+           AspectCount.getValuesForTable();
+           if(Config.get().SHOW_WINDOW_SUMMARY == true) {
+               TableBasic frame = new TableBasic(AspectCount.getValuesForTable());
+               frame.setTitle("Profiler Summary");
+               frame.setPreferredSize(new Dimension(800, 600));
+               frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+               frame.pack();
+               frame.setLocationRelativeTo( null );
+               frame.setVisible(true);
+           }
+
            AspectCount.printStats();
            Logger.get().close();
        }
