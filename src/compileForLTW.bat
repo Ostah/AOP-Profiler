@@ -1,0 +1,3 @@
+ajc -source 1.6 -target 1.6 -outjar aspects.jar -outxml annotations\ProfilerProfile.java annotations\ProfilerIgnore.java aspects\Config.java aspects\Logger.java aspects\MethodCall.java aspects\AspectAllMethods.aj aspects\TableBasic.java aspects\AspectApplicationExit.aj  aspects\AspectCount.aj aspects\AspectTimer.aj 
+
+java -javaagent:C:\aspectj1.7\lib\aspectjweaver.jar -classpath "code;tracing.jar;C:\aspectj1.7\lib\aspectjrt.jar" -classpath . HelloWorld2

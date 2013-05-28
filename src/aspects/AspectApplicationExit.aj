@@ -24,7 +24,8 @@ public aspect AspectApplicationExit {
        after():  execution( public static void main(..)) {
 
            AspectCount.getCallerMethod();
-           if(Config.get().SHOW_WINDOW_SUMMARY == true) {
+
+           if(Config.get().SHOW_WINDOW_SUMMARY == true) {  // summary window
                TableBasic frame = new TableBasic();
 
                String[] labels1 = {"Caller", "Method", "Count"} ;

@@ -18,16 +18,17 @@ public abstract aspect AspectAllMethods {
     (
        (call(* *(..)) || call(*.new(..))) && !within(aspects..*)&& !within(size..*) &&
        (
-                if(Config.get().PROFILE_ONLY_ANNOTATED == true)&&
+                if(Config.get().PROFILE_ONLY_ANNOTATED.booleanValue() == true)&&
                 (
                     (
+
                         call(@annotations.ProfilerProfile * *.*(..)) ||
                         within(@annotations.ProfilerProfile *)
                     )
                     && !call(@annotations.ProfilerIgnore * *.*(..))
                 )
                 ||
-                if(Config.get().PROFILE_ONLY_ANNOTATED == false) &&
+                if(Config.get().PROFILE_ONLY_ANNOTATED.booleanValue() == false) &&
                 (
 
                     (
