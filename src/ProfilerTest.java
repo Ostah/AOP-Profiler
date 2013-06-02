@@ -1,6 +1,4 @@
-import annotations.ProfilerIgnore;
 import annotations.ProfilerProfile;
-import aspects.AspectCount;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,28 +18,31 @@ public class ProfilerTest {
     @ProfilerProfile
     public void firstTestMethod() {
         //System.out.println("firstTestMethod");
+
+
     }
 
     public void secondTestMethod() {
        // HeapTestClass a = new HeapTestClass();
-        System.out.println("secondTestMethod");
+        firstTestMethod();
     }
 
     public void otherMethod() {
-        System.out.println("otherMethod");
-        this.secondTestMethod();
+        firstTestMethod();
+        secondTestMethod();
     }
 
     public static void main(String[] args) {
         ProfilerTest profilerTest = new ProfilerTest();
-        Integer tralala = new Integer(1231);
-        profilerTest.firstTestMethod();
-        profilerTest.firstTestMethod();
-        profilerTest.firstTestMethod();
+//        Integer tralala = new Integer(1231);
+        profilerTest.otherMethod();
         profilerTest.secondTestMethod();
-        profilerTest.otherMethod();
-        profilerTest.otherMethod();
-        profilerTest.otherMethod();
+//        profilerTest.firstTestMethod();
+//        profilerTest.firstTestMethod();
+//        profilerTest.secondTestMethod();
+//        profilerTest.otherMethod();
+//        profilerTest.otherMethod();
+//        profilerTest.otherMethod();
 
 
 

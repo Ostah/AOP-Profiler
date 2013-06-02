@@ -30,11 +30,16 @@ public aspect AspectApplicationExit {
 
                String[] labels1 = {"Caller", "Method", "Count"} ;
                String[] labels2 = {"Caller", "Count"} ;
+               String[] labels3 = {"Method", "Time", "Time w/o inner methods"} ;
                frame.addTableTab(AspectCount.getCallerMethod(), labels1, "Caller/Method",2);
                frame.addTableTab(AspectCount.getCaller(), labels2, "Method Count",1);
+               frame.addTableTab(AspectTimer.getInnerTime(), labels3, "Times", 1);
+               frame.addTreeMap();
+
+               System.out.println("AAAA: " + CallLogger.INSTANCE.getRootTreeNode());
            }
 
-           AspectCount.printStats();
+           //AspectCount.printStats();
            Logger.get().close();
        }
 }

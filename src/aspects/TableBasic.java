@@ -1,12 +1,14 @@
 package aspects;
 
-import java.awt.*;
-import java.util.*;
 import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class TableBasic extends JFrame
 {
-    public ArrayList<JTable> mTables = new ArrayList<JTable>(); // dostęp do tabelek może sie przydać więc dodaje to tutaj
+    public ArrayList<Object> mTables = new ArrayList<Object>(); // dostęp do tabelek może sie przydać więc dodaje to tutaj
     JTabbedPane mTabbedPane;
 
     public TableBasic(){
@@ -20,7 +22,7 @@ public class TableBasic extends JFrame
         setVisible(true);
     }
 
-    public void addTableTab(Object[][] data, String[] columnNames, String paneName, int sortColumn){
+    public void addTableTab(Object[][] data, String[] columnNames, String paneName, int sortColumn) {
 
         JTable table = new JTable(data, columnNames);
         table.setPreferredScrollableViewportSize(table.getPreferredSize());
@@ -37,4 +39,35 @@ public class TableBasic extends JFrame
         mTables.add(table);
     }
 
+    public void addTreeMap() {
+        TreeNode rootNode = CallLogger.INSTANCE.getRootTreeNode();
+        JTree tree = new JTree(parseTree(rootNode, null));
+        mTabbedPane.add("Tree map", new JScrollPane(tree));
+    }
+
+    public DefaultMutableTreeNode parseTree(TreeNode node, DefaultMutableTreeNode visualNode) {
+        System.out.println("node: " + node);
+
+        DefaultMutableTreeNode temp = new DefaultMutableTreeNode(node.self);
+
+        if (visualNode == null) {
+            visualNode = temp;
+        } else {
+            visualNode.add(temp);
+        }
+
+        ArrayList<TreeNode> children = node.children;
+        if (children == null || children.isEmpty()) {
+           return null;
+        } else {
+            Iterator<TreeNode> i = children.iterator();
+            while (i.hasNext()) {
+                TreeNode tN = i.next();
+                parseTree(tN, temp);
+                i.remove();
+            }
+        }
+
+        return visualNode;
+    }
 }

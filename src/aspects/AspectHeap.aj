@@ -11,6 +11,12 @@ import java.util.Hashtable;
 * Time: 18:49
 * To change this template use File | Settings | File Templates.
 */
+
+//within pakiety - sterowanie pakietami
+//z jakiej metody jest wywolywana metoda, i co wywoluje ona sama
+//narzut czasowy - jak wplywa aop na wydajnosc aplikacji
+//% bledu w czasach
+
 public aspect AspectHeap {
     public static Hashtable usesList = new Hashtable();
 

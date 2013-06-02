@@ -16,7 +16,7 @@ public abstract aspect AspectAllMethods {
     // Ostah - zmieniać z ostrożnością :D
     pointcut AllMethods() :
     (
-       (call(* *(..)) || call(*.new(..))) && !within(aspects..*)&& !within(size..*) &&
+       (call(* *(..)) || call(*.new(..))) && !within(CallLoger) && !within(aspects..*)&& !within(size..*) &&
        (
                 if(Config.get().PROFILE_ONLY_ANNOTATED.booleanValue() == true)&&
                 (
