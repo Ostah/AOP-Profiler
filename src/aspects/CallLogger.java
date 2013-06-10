@@ -56,7 +56,6 @@ public class CallLogger
                 counter += 1;
                 treeNode.counter = counter;
             }
-            System.out.println("pierwszy raz" + counter);
             innerHashMap.put(treeNode, counter);
 
             currentTreeNode.children.put(treeNode.self, innerHashMap);
