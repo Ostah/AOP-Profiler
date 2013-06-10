@@ -6,12 +6,12 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Ostah
- * Date: 17.04.13
- * Time: 14:49
- * To change this template use File | Settings | File Templates.
- */
+* Created with IntelliJ IDEA.
+* User: Ostah
+* Date: 17.04.13
+* Time: 14:49
+* To change this template use File | Settings | File Templates.
+*/
 
 
 public aspect AspectCount extends AspectAllMethods {
@@ -27,28 +27,35 @@ public aspect AspectCount extends AspectAllMethods {
         if(i  !=  null)  callCounts.put(name,new  Integer(i.intValue()+1));
         else  callCounts.put(name,new  Integer(1));
 
-        //zliczanie wywołań 2
+        //zliczanie wywolań z danego callera
         MethodCall temp = new MethodCall(name,caller);
         i  =  callCountsAccurate.get(temp);
         if(i  !=  null)  callCountsAccurate.put(temp,new  Integer(i.intValue()+1));
         else  callCountsAccurate.put(temp,new  Integer(1));
 
-       // System.out.println("metoda : "+ name+" wywołana z : "+caller+"\n");
     }
 
     public static void printStats(){
 
-        Iterator it=callCounts.entrySet().iterator();
 
-        Logger.get().writeLine("\nStatistics ------------------------------------------------------ ");
+
+        Logger.get().writeLine("\nStatistics Method Calls ------------------------------------------------------ ");
+        Iterator it=callCounts.entrySet().iterator();
         while(it.hasNext()){
             Map.Entry m =(Map.Entry)it.next();
             String key=(String)m.getKey();
             Integer value=(Integer)m.getValue();
             Logger.get().writeLine("Method: "+key+" was called "+value+" times");
         }
-        Logger.get().writeLine("-----------------------------------------------------------------\n") ;
-        System.out.println(callCountsAccurate);
+        Logger.get().writeLine("-----------------------------------------------------------------\n\n") ;
+
+        Logger.get().writeLine("\nStatistics Caller/Method Calls ------------------------------------------------------ ");
+        it=callCountsAccurate.entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry m = (Map.Entry)it.next();
+            Logger.get().writeLine("Method: "+((MethodCall) m.getKey()).getMethod()+" was called from "+((MethodCall) m.getKey()).getCaller() + " "+ m.getValue()+" times");
+        }
+        Logger.get().writeLine("-----------------------------------------------------------------\n\n") ;
     }
 
     public static Object[][] getCallerMethod(){

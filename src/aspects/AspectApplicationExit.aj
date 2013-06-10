@@ -1,16 +1,12 @@
 package aspects;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Ostah
- * Date: 20.05.13
- * Time: 22:11
- * To change this template use File | Settings | File Templates.
-
-    within pakiety - sterowanie pakietami
-    narzut czasowy - jak wplywa aop na wydajnosc aplikacji
-    % bledu w czasach
- */
+* Created with IntelliJ IDEA.
+* User: Ostah
+* Date: 20.05.13
+* Time: 22:11
+* To change this template use File | Settings | File Templates.
+*/
 
 public aspect AspectApplicationExit {
        TableBasic frame;
@@ -25,8 +21,8 @@ public aspect AspectApplicationExit {
        after():  execution( public static void main(..)) {
            frame = new TableBasic();
            System.out.println("After" )   ;
+           AspectCount.printStats();
 
-           AspectCount.getCallerMethod();
 
            if(Config.get().SHOW_WINDOW_SUMMARY == true) {  // summary window
 
@@ -41,7 +37,7 @@ public aspect AspectApplicationExit {
                frame.addTreeMap();
                System.out.println("skonczono rysownaie");
 
-               System.out.println("AAAA: " + CallLogger.INSTANCE.getRootTreeNode());
+               //System.out.println("AAAA: " + CallLogger.INSTANCE.getRootTreeNode());
            }
 
            //AspectCount.printStats();

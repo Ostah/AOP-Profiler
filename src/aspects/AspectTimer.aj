@@ -1,10 +1,10 @@
 package aspects; /**
- * Created with IntelliJ IDEA.
- * User: Jacek
- * Date: 07.05.2013
- * Time: 21:02
- * To change this template use File | Settings | File Templates.
- */
+* Created with IntelliJ IDEA.
+* User: Jacek
+* Date: 07.05.2013
+* Time: 21:02
+* To change this template use File | Settings | File Templates.
+*/
 
 import java.math.BigDecimal;
 import java.util.HashMap;

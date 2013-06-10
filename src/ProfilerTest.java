@@ -38,6 +38,7 @@ public class ProfilerTest {
         int[] kickerNumbers = new int[900000];
         for(int i = 0; i < kickerNumbers.length; i++) {
             kickerNumbers[i] = (int)(Math.random()*0+9);
+            otherMethod();
         }
         Arrays.sort(kickerNumbers);
     }
@@ -45,9 +46,14 @@ public class ProfilerTest {
     public static void main(String[] args) {
         ProfilerTest profilerTest = new ProfilerTest();
 //        Integer tralala = new Integer(1231);
+        System.out.println("time start: "+System.nanoTime());
+        long time = System.nanoTime()   ;
         profilerTest.test();
         profilerTest.otherMethod();
         profilerTest.secondTestMethod();
+
+        time = System.nanoTime() - time;
+        System.out.println("time elapsed: "+time);
 //        profilerTest.firstTestMethod();
 //        profilerTest.firstTestMethod();
 //        profilerTest.secondTestMethod();

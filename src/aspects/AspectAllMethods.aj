@@ -1,11 +1,11 @@
 package aspects;
 /**
- * Created with IntelliJ IDEA.
- * User: Ostah
- * Date: 07.05.13
- * Time: 18:44
- * To change this template use File | Settings | File Templates.
- */
+* Created with IntelliJ IDEA.
+* User: Ostah
+* Date: 07.05.13
+* Time: 18:44
+* To change this template use File | Settings | File Templates.
+*/
 
 
 public abstract aspect AspectAllMethods {
@@ -16,7 +16,7 @@ public abstract aspect AspectAllMethods {
     // Ostah - zmieniać z ostrożnością :D
     pointcut AllMethods() :
     (
-       (call(* *(..)) || call(*.new(..))) && !within(CallLoger) && !within(aspects..*)&& !within(size..*) &&
+       (call(* *(..)) || call(*.new(..)))  && !within(aspects..*) &&
        (
                 if(Config.get().PROFILE_ONLY_ANNOTATED.booleanValue() == true)&&
                 (
