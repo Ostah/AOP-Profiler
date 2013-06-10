@@ -1,5 +1,7 @@
 import annotations.ProfilerProfile;
 
+import java.util.Arrays;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Jacek
@@ -32,9 +34,18 @@ public class ProfilerTest {
         secondTestMethod();
     }
 
+    public void test(){
+        int[] kickerNumbers = new int[900000];
+        for(int i = 0; i < kickerNumbers.length; i++) {
+            kickerNumbers[i] = (int)(Math.random()*0+9);
+        }
+        Arrays.sort(kickerNumbers);
+    }
+
     public static void main(String[] args) {
         ProfilerTest profilerTest = new ProfilerTest();
 //        Integer tralala = new Integer(1231);
+        profilerTest.test();
         profilerTest.otherMethod();
         profilerTest.secondTestMethod();
 //        profilerTest.firstTestMethod();

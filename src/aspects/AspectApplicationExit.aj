@@ -6,27 +6,30 @@ package aspects;
  * Date: 20.05.13
  * Time: 22:11
  * To change this template use File | Settings | File Templates.
- *
- * within pakiety - sterowanie pakietami
-    proste gui
-    ltw
-    z jakiej metody jest wywolywana metoda, i co wywoluje ona sama
+
+    within pakiety - sterowanie pakietami
     narzut czasowy - jak wplywa aop na wydajnosc aplikacji
     % bledu w czasach
  */
 
 public aspect AspectApplicationExit {
-
+       TableBasic frame;
        before():  execution( public static void main(..)) {
               Config.get();
+
+           Runtime.getRuntime().addShutdownHook(new Thread() {
+               public void run() { beforeExit(); }
+           });
        }
 
        after():  execution( public static void main(..)) {
+           frame = new TableBasic();
+           System.out.println("After" )   ;
 
            AspectCount.getCallerMethod();
 
            if(Config.get().SHOW_WINDOW_SUMMARY == true) {  // summary window
-               TableBasic frame = new TableBasic();
+
 
                String[] labels1 = {"Caller", "Method", "Count"} ;
                String[] labels2 = {"Caller", "Count"} ;
@@ -41,5 +44,13 @@ public aspect AspectApplicationExit {
 
            //AspectCount.printStats();
            Logger.get().close();
+       }
+
+        before():  execution( public void beforeExit(..)) {
+            System.out.println("beforeexit" )   ;
+
+        }
+       public void beforeExit(){
+
        }
 }
