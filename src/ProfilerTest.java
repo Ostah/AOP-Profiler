@@ -35,7 +35,7 @@ public class ProfilerTest {
     }
 
     public void test(){
-        int[] kickerNumbers = new int[900000];
+        int[] kickerNumbers = new int[100000];
         for(int i = 0; i < kickerNumbers.length; i++) {
             kickerNumbers[i] = (int)(Math.random()*0+9);
         }

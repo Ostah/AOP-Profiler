@@ -1,6 +1,6 @@
 package aspects;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,7 +13,8 @@ import java.util.ArrayList;
 public class TreeNode {
     String self;
     TreeNode parent;
-    ArrayList <TreeNode> children;
+    HashMap <String, Object> children;
+    int counter = 1;
 
     TreeNode(String self) {
         this.self = self;

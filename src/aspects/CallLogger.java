@@ -41,9 +41,25 @@ public class CallLogger
             currentTreeNode = treeNode;
         } else {
             if (currentTreeNode.children == null) {
-                currentTreeNode.children = new ArrayList<TreeNode>();
+                currentTreeNode.children = new HashMap<String, Object>();
             }
-            currentTreeNode.children.add(treeNode);
+            HashMap<TreeNode, Integer> innerHashMap = new HashMap<TreeNode, Integer>();
+            Integer counter = 1;
+            if (currentTreeNode.children.containsKey(treeNode.self)) { //the same function called many times
+                innerHashMap = (HashMap<TreeNode, Integer>)currentTreeNode.children.get(treeNode.self);
+                Iterator i = innerHashMap.entrySet().iterator();
+                while (i.hasNext()) {
+                    Map.Entry innerPairs = (Map.Entry)i.next();
+                    counter = (Integer)innerPairs.getValue();
+                    i.remove();
+                }
+                counter += 1;
+                treeNode.counter = counter;
+            }
+            System.out.println("pierwszy raz" + counter);
+            innerHashMap.put(treeNode, counter);
+
+            currentTreeNode.children.put(treeNode.self, innerHashMap);
             treeNode.parent = currentTreeNode;
             currentTreeNode = treeNode;
         }

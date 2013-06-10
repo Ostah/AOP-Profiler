@@ -3,8 +3,7 @@ package aspects;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
 
 public class TableBasic extends JFrame
 {
@@ -48,7 +47,9 @@ public class TableBasic extends JFrame
     public DefaultMutableTreeNode parseTree(TreeNode node, DefaultMutableTreeNode visualNode) {
        // System.out.println("node: " + node);
 
-        DefaultMutableTreeNode temp = new DefaultMutableTreeNode(node.self);
+
+
+        DefaultMutableTreeNode temp = new DefaultMutableTreeNode(node.counter + " x " + node.self);
 
         if (visualNode == null) {
             visualNode = temp;
@@ -56,14 +57,21 @@ public class TableBasic extends JFrame
             visualNode.add(temp);
         }
 
-        ArrayList<TreeNode> children = node.children;
+        HashMap<String,Object> children = node.children;
         if (children == null || children.isEmpty()) {
            return null;
         } else {
-            Iterator<TreeNode> i = children.iterator();
+            Iterator i = children.entrySet().iterator();
             while (i.hasNext()) {
-                TreeNode tN = i.next();
-                parseTree(tN, temp);
+                Map.Entry pairs = (Map.Entry)i.next();
+                HashMap <TreeNode, Integer> innerHashMap = (HashMap<TreeNode, Integer>)pairs.getValue();
+                Iterator inner = innerHashMap.entrySet().iterator();
+                while (inner.hasNext()) {
+                    Map.Entry innerPairs = (Map.Entry)inner.next();
+                    TreeNode tN = (TreeNode) innerPairs.getKey();
+                    parseTree(tN, temp);
+                    inner.remove();
+                }
                 i.remove();
             }
         }
