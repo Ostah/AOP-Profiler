@@ -29,11 +29,10 @@ public class CallLogger
 
 
     public void pushMethod(Signature s) {
-        //System.out.println("PUSH");
 
         TreeNode treeNode = new TreeNode(s.toString());
         if (root == null) {
-            root = new TreeNode("void ProfilerTest.main(String[])");
+            root = new TreeNode("main(String[])");
             currentTreeNode = root;
         }
 

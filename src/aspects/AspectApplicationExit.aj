@@ -20,7 +20,6 @@ public aspect AspectApplicationExit {
 
        after():  execution( public static void main(..)) {
            frame = new TableBasic();
-           System.out.println("After" )   ;
            AspectCount.printStats();
 
 
@@ -33,9 +32,7 @@ public aspect AspectApplicationExit {
                frame.addTableTab(AspectCount.getCallerMethod(), labels1, "Caller/Method",2);
                frame.addTableTab(AspectCount.getCaller(), labels2, "Method Count",1);
                frame.addTableTab(AspectTimer.getInnerTime(), labels3, "Times", 1);
-               System.out.println("skonczono model");
                frame.addTreeMap();
-               System.out.println("skonczono rysownaie");
 
                //System.out.println("AAAA: " + CallLogger.INSTANCE.getRootTreeNode());
            }
@@ -45,7 +42,7 @@ public aspect AspectApplicationExit {
        }
 
         before():  execution( public void beforeExit(..)) {
-            System.out.println("beforeexit" )   ;
+            System.out.println("before exit" )   ;
 
         }
        public void beforeExit(){

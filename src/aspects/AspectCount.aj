@@ -35,9 +35,7 @@ public aspect AspectCount extends AspectAllMethods {
 
     }
 
-    public static void printStats(){
-
-
+    public static void printStats() {
 
         Logger.get().writeLine("\nStatistics Method Calls ------------------------------------------------------ ");
         Iterator it=callCounts.entrySet().iterator();

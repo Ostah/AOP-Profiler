@@ -29,7 +29,6 @@ public aspect AspectTimer extends AspectAllMethods
             Double previousTime = times.get(caller);
             previousTime += (end - start);
             times.put(caller, previousTime);
-            //System.out.println("TEEEERAZ " + previousTime);
         } else {
             times.put(caller, end - start);
         }
@@ -45,7 +44,6 @@ public aspect AspectTimer extends AspectAllMethods
         innerAndOuterTimes.add(1, new BigDecimal(Double.toString(((end-start) - innerTime.doubleValue())/1000000000)).toPlainString());
 
         logTimes.put(thisJoinPointStaticPart.getSignature().toString(), innerAndOuterTimes);
-       // System.out.println("Method: " + thisJoinPointStaticPart.getSignature() + " took " + new BigDecimal(Double.toString((end-start)/1000000000)).toPlainString() + " seconds, without inner methods took: " + new BigDecimal(Double.toString(((end-start) - innerTime.doubleValue())/1000000000)).toPlainString() + " seconds");
         return ret;
     }
 
