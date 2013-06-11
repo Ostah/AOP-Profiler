@@ -31,12 +31,12 @@ public class Logger {
     }
 
     public void writeLine(String line){
-//        try {
-//            System.out.println("Logger: "+line);
-//            out.write(line+"\n");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            System.out.println("Logger: "+line);
+            out.write(line+"\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void close(){

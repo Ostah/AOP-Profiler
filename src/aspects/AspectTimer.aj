@@ -62,4 +62,18 @@ public aspect AspectTimer extends AspectAllMethods
         }
         return o;
     }
+
+    public static void printStats() {
+
+        Logger.get().writeLine("\nStatistics Method Time execution ------------------------------------------------------ ");
+        Iterator it=logTimes.entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry m =(Map.Entry)it.next();
+            String key=(String)m.getKey();
+            ArrayList<String> value=(ArrayList)m.getValue();
+            Logger.get().writeLine("Method: "+key+ " took " + value.get(0) + " s, without inner methods took " + value.get(1) + " s");// was called "+value+" times");
+        }
+        Logger.get().writeLine("-----------------------------------------------------------------\n\n") ;
+
+    }
 }

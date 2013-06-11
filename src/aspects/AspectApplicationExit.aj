@@ -21,6 +21,7 @@ public aspect AspectApplicationExit {
        after():  execution( public static void main(..)) {
            frame = new TableBasic();
            AspectCount.printStats();
+           AspectTimer.printStats();
 
 
            if(Config.get().SHOW_WINDOW_SUMMARY == true) {  // summary window
