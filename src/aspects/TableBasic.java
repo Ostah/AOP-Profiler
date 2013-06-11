@@ -45,10 +45,6 @@ public class TableBasic extends JFrame
     }
 
     public DefaultMutableTreeNode parseTree(TreeNode node, DefaultMutableTreeNode visualNode) {
-       // System.out.println("node: " + node);
-
-
-
         DefaultMutableTreeNode temp = new DefaultMutableTreeNode(node.counter + " x " + node.self);
 
         if (visualNode == null) {
