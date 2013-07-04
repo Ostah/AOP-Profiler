@@ -1,3 +1,5 @@
+# AOP - Profiler
+
 Profiler dla aplikacji napisanych w języku Java. 
 Korzysta z programowania aspektowego (AspectJ), dzięki skorzystaniu z LTW pozwala na profilowanie programów bez dostępu do ich źródeł.
 
